@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: shoppinglists
+  pool: 5
+  username: sigrid_shoppinglist
+  password: store
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: shoppinglists
+  pool: 5
+  username: sigrid_shoppinglist
+  password: store
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: shoppinglists
+  pool: 5
+  username: sigrid_shoppinglist
+  password: store

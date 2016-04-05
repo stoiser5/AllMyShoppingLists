@@ -1,0 +1,44 @@
+<%- model_class = ShoppingList -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shopping_lists.each do |shopping_list| %>
+
+      <tr>
+        <td><%= link_to shopping_list.id, shopping_list_path(shopping_list) %></td>
+        <td><strong><%= shopping_list.name %></strong></td>
+        <td><%=l shopping_list.created_at %></td>
+        <td>
+          <%= link_to "show", {:controller => "shopping_lists", :action => "show", :id => shopping_list.id}%>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_shopping_list_path(shopping_list), :class => 'btn btn-default btn-xs'  %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      shopping_list_path(shopping_list),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+      <% get_items_for_list(shopping_list.id) %>
+      <tr><td colspan="4"><% @items_in_this_list.each do |item|%>
+        <ul><li><%=item %></li>
+        </ul>
+        <%end%>
+            </td></tr>
+     <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_shopping_list_path,
+            :class => 'btn btn-primary' %>

@@ -1,0 +1,28 @@
+<%- model_class = ShoppingList -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<table>
+  <tr><td style="width:60px"><strong><%= model_class.human_attribute_name(:name) %>:</strong></td>
+  <td><%= @shopping_list.name %></td></tr>
+</table>
+<br>
+<table>
+  <thead><th>Item</th><th>Store</th><th></th></thead>
+  <tbody>
+   <% for counter in 0..@item_name_arr.length %>
+   <tr><td style="width:130px"><%= @item_name_arr[counter] %></td> <td style="width:130px"><%= @store_arr[counter] %></td></tr>
+     <%end%>
+  </tbody>
+
+</table>
+
+<br>
+<br>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              shopping_lists_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_shopping_list_path(@shopping_list), :class => 'btn btn-default' %>
+
