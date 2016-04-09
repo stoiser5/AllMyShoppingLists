@@ -13,16 +13,6 @@ class ShoppingListsController < ApplicationController
   def show
 
     redirect_to url_for(:controller => :items, :action => :index, :id => @shopping_list.id)
-    #id = @shopping_list.id
-    #items = Item.where(shopping_list_id: id)
-
-    #@item_name_arr = []
-    #@store_arr = []
-
-    #items.each do |record|
-    #  @item_name_arr << record.item_name
-    #  @store_arr << record.store
-    #end
 
   end
 
@@ -71,8 +61,10 @@ class ShoppingListsController < ApplicationController
   # DELETE /shopping_lists/1.json
   def destroy
     id = @shopping_list.id
+    items_to_delete = Item.where(shopping_list_id: id)
+    items_to_delete.delete_all
     @shopping_list.destroy
-    Item.where(shopping_list_id: id).delete_all
+
     respond_to do |format|
       format.html { redirect_to shopping_lists_url, notice: 'Shopping list was successfully destroyed.' }
       format.json { head :no_content }
