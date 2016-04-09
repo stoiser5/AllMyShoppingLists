@@ -19,7 +19,8 @@
         <td><strong><%= shopping_list.name %></strong></td>
         <td><%=l shopping_list.created_at %></td>
         <td>
-          <%= link_to "show", {:controller => "shopping_lists", :action => "show", :id => shopping_list.id}%>
+          <%= link_to "show", {:controller => "shopping_lists", :action => "show", :id => shopping_list.id, :class => 'btn btn-primary'}%>
+
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_shopping_list_path(shopping_list), :class => 'btn btn-default btn-xs'  %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
